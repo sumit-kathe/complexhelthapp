@@ -19,6 +19,16 @@ ul {
     text-decoration: none;
   }
   
-  li a:hover {
-    background-color: #111;
+  // li a:hover {
+  //   background-color: #111;
+  // }
+
+  .active-class{
+
+     background-color: rgb(12, 239, 54);
+     border-radius: 7px;
+padding:8px;
+font-size: 18px;
+
+margin-top: 5px;
   }

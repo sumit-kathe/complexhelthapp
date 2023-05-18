@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { stateType } from "../../store/store-types";
 import HealthDataContext from "../../context/health-data-context";
-import { Link, useParams } from "react-router-dom";
+import { Link, NavLink, useParams } from "react-router-dom";
 import { initalState } from "../../store/reducer-store";
 import styless from './EditHealthData.module.scss';
 import ShowHealthData from "../ShowHealthData/ShowHealthData";
@@ -12,7 +12,7 @@ const EditHealthData = () => {
     console.table(parms)
     const {users, dispatchFun} = useContext(HealthDataContext);
    
-    const [ userData, setUserData ] = useState<stateType>(initalState[0]);
+    const [ userData, setUserData ] = useState<any>(initalState[0]);
     const navigate = useNavigate();
 
     
@@ -40,11 +40,21 @@ const EditHealthData = () => {
         dispatchFun(action)
     }
 
-    const onChangeBP = (e:any) => {
+
+     
+
+
+    const onchangeinputdata = (inputvalue:any , key:any) => {
         // console.log('e.name', e.target.value);
-        var newBP = {...userData.BP, value: e.target.value};
-        var newUserData = {...userData, BP: newBP};
+        var newBP = {...userData[key], value: inputvalue};
+        var newUserData = {...userData, [key]: newBP};
         setUserData(newUserData)
+
+         console.log("userr data "   ,     userData)
+    //     let keyarr = Object.keys(userData)
+
+    //  console.log( "array of all key key ",keyarr)
+
 
         const action = {
             type: 'UPDATE_USER_DATA',
@@ -135,7 +145,7 @@ const EditHealthData = () => {
         }
         dispatchFun(action);
         
-        <Link to='/show'> </Link>
+        <NavLink to='/main'> </NavLink>
 
     }
 
@@ -163,7 +173,7 @@ placeholder="name" />
 <input 
     type="number" 
     value={userData.BP.value}
-    onChange={onChangeBP}
+    onChange={(e)=>onchangeinputdata(e.target.value ,"BP")}
     id="bp"
     placeholder={userData.BP.name} />
     
@@ -174,7 +184,7 @@ placeholder="name" />
 <input 
     type="number" 
     value={userData.HR.value}
-    onChange={onChangeHR}
+    onChange={(e)=>onchangeinputdata(e.target.value ,"HR")}
     id="HR"
     placeholder={userData.HR.name} />
     
@@ -186,7 +196,7 @@ placeholder="name" />
 <input 
     type="number" 
     value={userData.SBP.value}
-    onChange={onChangeSBP}
+    onChange={(e)=>onchangeinputdata(e.target.value ,"SBP")}
     id="SBP"
     placeholder={userData.SBP.name} />
     
@@ -198,7 +208,7 @@ placeholder="name" />
 <input 
     type="number" 
     value={userData.DBP.value}
-    onChange={onChangeDBP}
+    onChange={(e)=>onchangeinputdata(e.target.value ,"DBP")}
     id="DBP"
     placeholder={userData.DBP.name} />
     
@@ -210,7 +220,7 @@ placeholder="name" />
 <input 
     type="number" 
     value={userData.PR.value}
-    onChange={onChangePR}
+    onChange={(e)=>onchangeinputdata(e.target.value ,"PR")}
     id="PR"
     placeholder={userData.PR.name} />
     
@@ -221,7 +231,7 @@ placeholder="name" />
 <input 
     type="number" 
     value={userData.SR.value}
-    onChange={onChangeSR}
+    onChange={(e)=>onchangeinputdata(e.target.value ,"SR")}
     id="SR"
     placeholder={userData.SR.name} />
     
